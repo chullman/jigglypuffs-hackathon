@@ -22,6 +22,12 @@ class Game {
     }
   }
 
+  start() {
+    this._map.draw();
+    const main = document.querySelector('main');
+    main.appendChild(this._map.el);
+  }
+
   _moveUp() {
     console.log('up');
   }
