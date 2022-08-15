@@ -3,6 +3,7 @@ body {
     flex-direction: column;
     width: 100%;
     min-height: 100vh;
+    background: linear-gradient(145deg , rgba(71, 70, 70, 0.5), rgb(75, 73, 73));
 }
 
 * {
@@ -26,6 +27,10 @@ body {
     padding: 20px;
 }
 
+main {
+    margin-top: 72px;
+}
+
 .intro{
     /* padding:20px; */
     flex-grow: 1;
@@ -33,8 +38,6 @@ body {
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    background-color: white;
-    background-image: linear-gradient(145deg , rgba(71, 70, 70, 0.5), rgb(75, 73, 73));
 } 
 
 .about {
