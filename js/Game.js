@@ -9,6 +9,7 @@ function randomPokemonID(min, max) {
 class Game {
   constructor(map) {
     this._map = map;
+    this._pokemon = null;
   
     document.addEventListener('keydown', this._onKeyDown.bind(this));
   }
@@ -31,10 +32,9 @@ class Game {
   }
 
   async start() {
-    const pokemon = await this._getPokemon(levels.one.pokemonCount);
-    console.log(pokemon);
+    this._pokemon = await this._getPokemon(levels.one.pokemonCount);
     this._map.render();
-    this._map.draw(levels.one.path, pokemon);
+    this._map.draw(levels.one.path, this._pokemon);
     const main = document.querySelector('.game');
     main.appendChild(this._map.getMapEl());
     this._map.setPlayerPos(levels.one.start.row, levels.one.start.col);
