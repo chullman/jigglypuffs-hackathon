@@ -1,11 +1,3 @@
-import { applyStyles } from './helpers';
-
-const styles = {
-  display: 'flex',
-  flexDirection: 'row',
-  flexWrap: 'wrap'
-};
-
 class Map {
   constructor(tileSize, rows, columns) {
     this._tileSize = tileSize;
@@ -21,7 +13,6 @@ class Map {
     this._mapEl.classList.add('map');
     this._mapEl.style.width = this._columnCount * this._tileSize + 'px';
     this._mapEl.style.height = this._rowCount * this._tileSize + 'px';
-    applyStyles(this._mapEl, styles);
     document.body.appendChild(this._mapEl);
   }
 
