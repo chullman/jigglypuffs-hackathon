@@ -32,7 +32,7 @@ introLink.addEventListener('click', () => {
 function startGame() {
   const mapDiv = document.querySelector('.map');
   if (!mapDiv) {
-    const map = new Map(40, 20, 20);
+    const map = new Map(80, 10, 10);
     const game = new Game(map);
     game.start();
   }
