@@ -45,14 +45,19 @@ main {
 }
 .game {
     display: none;
+
 }
 .map {
     display: flex;
     flex-wrap: wrap;
 }
 
+.tile {
+    border: 1px solid black;
+}
+
 @media only screen and (max-width: 992px) {
     main {
-      margin-top: 172px;
+        margin-top: 172px;
     }
-  }
+}
