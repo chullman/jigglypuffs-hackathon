@@ -1,17 +1,36 @@
-import Map from './Map';
+import Map from './Map.js';
+import Game from './Game.js';
 
 const startGameLink = document.getElementById('start-game-link');
-const aboutLink = document.getElementById('about-link')
+const aboutLink = document.getElementById('about-link');
+const introLink = document.getElementById('intro-link');
 
-startGameLink.addEventListener('click', startGame);
-aboutLink.addEventListener('about', about);
+const intro = document.querySelector('.intro');
+const about = document.querySelector('.about');
+const game = document.querySelector('.game');
+
+startGameLink.addEventListener('click', () => {
+  intro.style.display = 'none';
+  about.style.display = 'none';
+  game.style.display = 'flex';
+
+  startGame();
+});
+
+aboutLink.addEventListener('click', () => {
+  intro.style.display = 'none';
+  game.style.display = 'none';
+  about.style.display = 'flex';
+});
+
+introLink.addEventListener('click', () => {
+  game.style.display = 'none';
+  about.style.display = 'none';
+  intro.style.display = 'flex';
+});
 
 function startGame() {
-  
   const map = new Map(40, 20, 20);
-
-}
-
-function about() {
-
+  const game = new Game(map);
+  game.start();
 }

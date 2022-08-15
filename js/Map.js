@@ -5,15 +5,15 @@ class Map {
     this._columnCount = columns;
   
     this._tileMatrix = [];
+    
     for (let i = 0; i < this._rowCount; i++) {
       this._tileMatrix.push([]);
     }
 
-    this._mapEl = document.createElement('div');
-    this._mapEl.classList.add('map');
-    this._mapEl.style.width = this._columnCount * this._tileSize + 'px';
-    this._mapEl.style.height = this._rowCount * this._tileSize + 'px';
-    document.body.appendChild(this._mapEl);
+    this.el = document.createElement('div');
+    this.el.classList.add('map');
+    this.el.style.width = this._columnCount * this._tileSize + 'px';
+    this.el.style.height = this._rowCount * this._tileSize + 'px';
   }
 
   draw() {
@@ -42,7 +42,7 @@ class Map {
   _renderTiles() {
     this._tileMatrix.forEach(row => {
       for (let tile of row) {
-        this._mapEl.appendChild(tile);
+        this.el.appendChild(tile);
       }
     });
   }

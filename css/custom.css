@@ -16,22 +16,17 @@ body {
     flex-wrap: wrap;
     flex-direction: column;
     align-items: center;
-    
-    
     /* background-color: white;
     background-image: linear-gradient(145deg , rgba(71, 70, 70, 0.5), rgb(75, 73, 73));
     margin-bottom: 50px;  */
-    
-    
 } 
+
 #welcome {
-    
     color: black;
     padding: 20px;
-    
-    
 }
-.general-main{
+
+.intro{
     /* padding:20px; */
     flex-grow: 1;
     display: flex;
@@ -42,10 +37,16 @@ body {
     background-image: linear-gradient(145deg , rgba(71, 70, 70, 0.5), rgb(75, 73, 73));
 } 
 
+.about {
+    display: none;
+}
+
+.game {
+    display: none;
+}
+
 .map {
     display: flex;
     flex-wrap: wrap;
-    /* background-color: white; */
-    /* background-image: linear-gradient(145deg , rgba(71, 70, 70, 0.5), rgb(75, 73, 73));
-     */
 }
+
