@@ -9,7 +9,6 @@ body {
 * {
     box-sizing: border-box;
 }
-
 #pokemonlogo {
     padding:300px;
     display: flex;
@@ -21,7 +20,6 @@ body {
     background-image: linear-gradient(145deg , rgba(71, 70, 70, 0.5), rgb(75, 73, 73));
     margin-bottom: 50px;  */
 } 
-
 #welcome {
     color: black;
     padding: 20px;
@@ -38,17 +36,17 @@ main {
     justify-content: center;
     flex-direction: column;
     align-items: center;
+    background-color: white;
+    background-image: linear-gradient(145deg , rgba(71, 70, 70, 0.5), rgb(75, 73, 73));
 } 
 
 .about {
     display: none;
 }
-
 .game {
     display: none;
 
 }
-
 .map {
     display: flex;
     flex-wrap: wrap;
@@ -56,4 +54,10 @@ main {
 
 .tile {
     border: 1px solid black;
+}
+
+@media only screen and (max-width: 992px) {
+    main {
+        margin-top: 172px;
+    }
 }

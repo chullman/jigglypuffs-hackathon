@@ -30,7 +30,10 @@ introLink.addEventListener('click', () => {
 });
 
 function startGame() {
-  const map = new Map(40, 20, 20);
-  const game = new Game(map);
-  game.start();
+  const mapDiv = document.querySelector('.map');
+  if (!mapDiv) {
+    const map = new Map(40, 20, 20);
+    const game = new Game(map);
+    game.start();
+  }
 }
