@@ -46,6 +46,7 @@ main {
 
 .game {
     display: none;
+
 }
 
 .map {
@@ -53,3 +54,6 @@ main {
     flex-wrap: wrap;
 }
 
+.tile {
+    border: 1px solid black;
+}

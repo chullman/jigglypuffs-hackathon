@@ -24,9 +24,11 @@ class Game {
 
   start() {
     this._map.draw();
-    const main = document.querySelector('main');
-    main.appendChild(this._map.el);
+    const main = document.querySelector('.game');
+    main.appendChild(this._map.getMapEl());
+    this._map.setPlayerPos();
   }
+
 
   _moveUp() {
     console.log('up');
