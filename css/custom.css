@@ -50,3 +50,9 @@ main {
     display: flex;
     flex-wrap: wrap;
 }
+
+@media only screen and (max-width: 992px) {
+    main {
+      margin-top: 172px;
+    }
+  }
