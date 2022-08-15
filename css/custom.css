@@ -3,6 +3,7 @@ body {
     flex-direction: column;
     width: 100%;
     min-height: 100vh;
+    background: linear-gradient(145deg , rgba(71, 70, 70, 0.5), rgb(75, 73, 73));
 }
 
 * {
@@ -16,15 +17,12 @@ body {
     flex-wrap: wrap;
     flex-direction: column;
     align-items: center;
-    
-    
     /* background-color: white;
     background-image: linear-gradient(145deg , rgba(71, 70, 70, 0.5), rgb(75, 73, 73));
     margin-bottom: 50px;  */
-    
-    
 } 
 
+<<<<<<< HEAD
 body {
     display: flex;
     flex-direction: column;
@@ -37,26 +35,47 @@ main {
 #welcome {
     
     color: white;
+=======
+#welcome {
+    color: black;
+>>>>>>> e0fb9505e3ff369a3964133bf3628d30ac833c55
     padding: 20px;
-    
-    
 }
 
+<<<<<<< HEAD
 .general-main{
+=======
+main {
+    margin-top: 72px;
+}
+
+.intro{
+>>>>>>> e0fb9505e3ff369a3964133bf3628d30ac833c55
     /* padding:20px; */
     flex-grow: 1;
     display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    background-color: white;
-    background-image: linear-gradient(145deg , rgba(71, 70, 70, 0.5), rgb(75, 73, 73));
 } 
+
+.about {
+    display: none;
+}
+
+.game {
+    display: none;
+}
 
 .map {
     display: flex;
     flex-wrap: wrap;
+<<<<<<< HEAD
     /* background-color: white; */
     background-color: linear-gradient(145deg , rgba(71, 70, 70, 0.5), rgb(75, 73, 73));
      
 }
+=======
+}
+
+>>>>>>> e0fb9505e3ff369a3964133bf3628d30ac833c55
