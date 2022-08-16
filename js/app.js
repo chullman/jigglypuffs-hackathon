@@ -34,6 +34,6 @@ function startGame() {
   if (!mapDiv) {
     const map = new Map(80, 10, 10);
     const game = new Game(map);
-    game.start();
+    game.start("one");
   }
 }
