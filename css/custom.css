@@ -141,7 +141,47 @@ main p {
     width: 200px;
 }
 
-.quiz .abort {
+.quiz .question {
+    text-align: center;
+}
+
+.quiz .choices {
+    margin-bottom: 1em;
+}
+
+.quiz .choice {
+    padding: 0.5em;
+    margin-bottom: 0.5em;
+    background-color: #000;
+    color: #fff;
+    text-align: center;
+    cursor: pointer;
+}
+
+.quiz .success {
+    padding: 1em;
+    margin-bottom: 1em;
+    background-color: green;
+    text-align: center;
+    color: #fff;
+}
+
+.quiz .try-again {
+    padding: 1em;
+    margin-bottom: 1em;
+    background-color: red;
+    text-align: center;
+    color: #fff;
+}
+
+.quiz .finish,
+.quiz .yes {
+    display: none;
+}
+
+.quiz .abort,
+.quiz .finish,
+.quiz .yes {
     padding: 0.5em 1em;
     border: 1px solid #000;
     border-radius: 3px;
