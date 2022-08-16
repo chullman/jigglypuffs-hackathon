@@ -32,25 +32,72 @@ class Game {
   }
 
   async start() {
-    this._pokemon = await this._getPokemon(levels.one.pokemonCount);
-    this._map.render();
-    this._map.draw(levels.one.path, this._pokemon);
-    const main = document.querySelector('.game');
-    main.appendChild(this._map.getMapEl());
-    this._map.setPlayerPos(levels.one.start.row, levels.one.start.col);
+    let error = undefined;
+    this._pokemon = await this._getPokemon(levels.one.pokemonCount)
+    .catch((err) => {
+      error = err;
+      console.warn(err.message);
+    });
+    const h1 = document.querySelector('.game h1');
+    if (typeof error === "undefined") {
+      h1.textContent = "Play Game";
+      this._map.render();
+      this._map.draw(levels.one.path, this._pokemon);
+      const main = document.querySelector('.game');
+      main.appendChild(this._map.getMapEl());
+      this._map.setPlayerPos(levels.one.start.row, levels.one.start.col);
+    } else {
+      // An error fetching from API occurred, so display relevant 'h1' title
+      (() => {
+        try {
+          h1.textContent = (JSON.parse(error.message)).message;
+        } catch {
+          h1.textContent = "Error: Unable to send request to third-party API";
+        }
+      })();
+
+    }
   }
+
 
   async _getPokemon(count) {
     const results = [];
     let i = 1;
-    while (i <= count) {
+    let errorThrown = false;
+    let errorObj = new Error();
+    while (i <= count && !errorThrown) {
       const randomID = randomPokemonID(1, TOTAL_POKEMON);
-      const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${randomID}`);
-      const json = await response.json();
-      results.push(json);
+
+      await fetch(`https://pokeapi.co/api/v2/pokemon/${randomID}`)
+      .then((response) => {
+        if (response.status >= 400 && response.status < 600) {
+          throw new Error(JSON.stringify({
+            code: response.status,
+            message: `Error: HTTP Error Code ${response.status} returned from PokeAPI`
+          }))
+        }
+        return response;
+      })
+      .then((response) => {
+        const json = response.json();
+        return json;
+      })
+      .then((json) => {
+        results.push(json);
+      })
+      .catch((error) => {
+        errorObj = error;
+        errorThrown = true; // To break out of the while loop
+      })
+
       i++;
     }
-    return results;
+    if (results.length > 0 && !errorThrown) {
+      return results;
+    } else {
+      throw errorObj;
+    }
+
   }
 
   _moveUp() {
