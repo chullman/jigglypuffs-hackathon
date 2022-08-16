@@ -10,7 +10,7 @@ body {
     box-sizing: border-box;
 }
 #pokemonlogo {
-    padding:300px;
+    padding:80px;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
