@@ -1,18 +1,15 @@
 import levels from './levels.js';
 import Quiz from './Quiz.js';
-
-const TOTAL_POKEMON = 915;
-
-function randomPokemonID(min, max) {
-  return Math.floor(Math.random() * (max - min + 1) + min);
-}
+import { getRandomPokemon } from './helpers.js';
 
 class Game {
   constructor(map) {
     this._map = map;
     this._pokemon = null;
+    this._quizesRemaining = 0;
   
     document.addEventListener('keydown', this._onKeyDown.bind(this));
+    document.addEventListener('quiz-complete', this._onQuizComplete.bind(this));
   }
 
   _onKeyDown(event) {
@@ -33,8 +30,8 @@ class Game {
   }
 
   async start(levelName) {
-    let error = undefined;
-    this._pokemon = await this._getPokemon(levels[levelName].pokemonCount)
+    let error;
+    this._pokemon = await getRandomPokemon(levels[levelName].pokemonCount)
     .catch((err) => {
       error = err;
       console.warn(err.message);
@@ -47,6 +44,7 @@ class Game {
       const main = document.querySelector('.game');
       main.appendChild(this._map.getMapEl());
       this._map.setPlayerPos(levels[levelName].start.row, levels[levelName].start.col);
+      this._quizesRemaining = this._pokemon.length;
     } else {
       // An error fetching from API occurred, so display relevant 'h1' title
       (() => {
@@ -58,47 +56,6 @@ class Game {
       })();
 
     }
-  }
-
-
-  async _getPokemon(count) {
-    const results = [];
-    let i = 1;
-    let errorThrown = false;
-    let errorObj = new Error();
-    while (i <= count && !errorThrown) {
-      const randomID = randomPokemonID(1, TOTAL_POKEMON);
-
-      await fetch(`https://pokeapi.co/api/v2/pokemon/${randomID}`)
-      .then((response) => {
-        if (response.status >= 400 && response.status < 600) {
-          throw new Error(JSON.stringify({
-            code: response.status,
-            message: `Error: HTTP Error Code ${response.status} returned from PokeAPI`
-          }))
-        }
-        return response;
-      })
-      .then((response) => {
-        const json = response.json();
-        return json;
-      })
-      .then((json) => {
-        results.push(json);
-      })
-      .catch((error) => {
-        errorObj = error;
-        errorThrown = true; // To break out of the while loop
-      })
-
-      i++;
-    }
-    if (results.length > 0 && !errorThrown) {
-      return results;
-    } else {
-      throw errorObj;
-    }
-
   }
 
   _moveUp() {
@@ -173,6 +130,13 @@ class Game {
   _startQuiz(pokemonData) {
     const quiz = new Quiz(pokemonData);
     quiz.start();
+  }
+
+  _onQuizComplete() {
+    this._quizesRemaining -= 1;
+    if (this._quizesRemaining === 0) {
+      console.log('level complete!');
+    }
   }
 }
 
