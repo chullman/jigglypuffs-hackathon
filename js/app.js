@@ -1,13 +1,17 @@
 import Map from './Map.js';
 import Game from './Game.js';
+import LevelState from './LevelState.js'
 
 const startGameLinks = document.getElementsByClassName('start-game-link');
 const aboutLink = document.getElementById('about-link');
 const introLink = document.getElementById('intro-link');
+const nextLevelLink = document.getElementById('next-level-link');
 
-const intro = document.querySelector('.intro');
-const about = document.querySelector('.about');
-const game = document.querySelector('.game');
+const introMain = document.querySelector('.intro');
+const aboutMain = document.querySelector('.about');
+const gameMain = document.querySelector('.game');
+
+const levelState = new LevelState(1);
 
 let characterImage = "images/Lance.png"
 
@@ -57,31 +61,34 @@ let choosing = document.querySelectorAll('img')
 
 for (let startGameLink of startGameLinks) {
   startGameLink.addEventListener('click', () => {
-    intro.style.display = 'none';
-    about.style.display = 'none';
-    game.style.display = 'flex';
+    introMain.style.display = 'none';
+    aboutMain.style.display = 'none';
+    gameMain.style.display = 'flex';
   
-    startGame();
+    startGame(levelState.getCurrentLevelName(), false, startGame);
   });
 }
 
 aboutLink.addEventListener('click', () => {
-  intro.style.display = 'none';
-  game.style.display = 'none';
-  about.style.display = 'flex';
+  introMain.style.display = 'none';
+  gameMain.style.display = 'none';
+  aboutMain.style.display = 'flex';
 });
 
 introLink.addEventListener('click', () => {
-  game.style.display = 'none';
-  about.style.display = 'none';
-  intro.style.display = 'flex';
+  gameMain.style.display = 'none';
+  aboutMain.style.display = 'none';
+  introMain.style.display = 'flex';
 });
 
-function startGame() {
+function startGame(levelName, rebuildMap) {
   const mapDiv = document.querySelector('.map');
-  if (!mapDiv) {
+  if (!mapDiv || rebuildMap) {
+    if (rebuildMap) {
+      mapDiv.remove();
+    }
     const map = new Map(80, 10, 10);
-    const game = new Game(map);
-    game.start("one", characterImage);
+    const game = new Game(map, levelState, startGame);
+    game.start(levelName, characterImage);
   }
 }

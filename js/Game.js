@@ -3,13 +3,17 @@ import Quiz from './Quiz.js';
 import { getRandomPokemon } from './helpers.js';
 
 class Game {
-  constructor(map) {
+  constructor(map, levelState, callback) {
+    this._levelState = levelState;
+    this._startGameCallback = callback;
     this._map = map;
     this._pokemon = null;
     this._quizesRemaining = 0;
   
-    document.addEventListener('keydown', this._onKeyDown.bind(this));
-    document.addEventListener('quiz-complete', this._onQuizComplete.bind(this));
+    this.boundKeydownEventHandler = this._onKeyDown.bind(this);
+    document.addEventListener('keydown', this.boundKeydownEventHandler);
+    this.boundQuizCompleteEventHandler = this._onQuizComplete.bind(this);
+    document.addEventListener('quiz-complete', this.boundQuizCompleteEventHandler);
   }
 
   _onKeyDown(event) {
@@ -136,6 +140,10 @@ class Game {
     this._quizesRemaining -= 1;
     if (this._quizesRemaining === 0) {
       console.log('level complete!');
+      document.removeEventListener('keydown', this.boundKeydownEventHandler);
+      document.removeEventListener('quiz-complete', this.boundQuizCompleteEventHandler);
+      this._levelState.increaseLevel();
+      this._startGameCallback(this._levelState.getCurrentLevelName(), true);
     }
   }
 }
