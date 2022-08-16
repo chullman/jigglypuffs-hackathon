@@ -133,6 +133,7 @@ class Map {
     this._row = newRow;
     this._col = newCol;
   }
+
 }
 
 export default Map;
