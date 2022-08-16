@@ -38,6 +38,7 @@ class Map {
             break;
           case 2:
             tile.classList.add('pokemon');
+            tile.dataset.name = pokemon[pokemonLeft - 1].name;
             tile.style.backgroundImage = `url('${pokemon[pokemonLeft - 1].sprites.front_default}')`;
             pokemonLeft -= 1;
             break;
@@ -90,6 +91,10 @@ class Map {
   isPathTile(row, col) {
     const tile = this.getDivOfTile(row, col);
     return tile.classList.contains('path')
+  }
+
+  isPokemonTile(row, col) {
+    return this._tileMatrix[row][col].classList.contains('pokemon');
   }
 
   updatePlayerPos(newRow, newCol) {
