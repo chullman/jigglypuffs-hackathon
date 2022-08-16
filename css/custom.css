@@ -55,6 +55,24 @@ main p {
 .about {
     display: none;
 }
+
+.about .animated-avatars {
+    display: block;
+    margin: auto;
+}
+
+.about p {
+    color: white;
+}
+
+.about hr {
+    height: 5px; 
+    width: 100%; 
+    color: yellow; 
+    background-color: yellow;
+    opacity: 1;
+}
+
 .game {
     display: none;
 }
