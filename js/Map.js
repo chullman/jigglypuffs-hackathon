@@ -66,13 +66,13 @@ class Map {
     return this._tileMatrix[rowNum][colNum];
   }
 
-  setPlayerPos(row, col) {
+  setPlayerPos(row, col, characterImage) {
     this._setCurrentTile(row, col);
 
     let playerTile = this.getDivOfTile(this._row, this._col);
 
     let playerImg = document.createElement("img");
-    playerImg.setAttribute("src", "../images/player1.png");
+    playerImg.setAttribute("src", characterImage );
     playerImg.classList.add('avatar');
     playerImg.setAttribute("width", "50%");
     playerImg.setAttribute("alt", "Player Avatar");
