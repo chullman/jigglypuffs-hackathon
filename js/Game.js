@@ -29,7 +29,7 @@ class Game {
     }
   }
 
-  async start(levelName) {
+  async start(levelName, characterImage) {
     let error;
     this._pokemon = await getRandomPokemon(levels[levelName].pokemonCount)
     .catch((err) => {
@@ -43,7 +43,7 @@ class Game {
       this._map.draw(levels[levelName].path, this._pokemon);
       const main = document.querySelector('.game');
       main.appendChild(this._map.getMapEl());
-      this._map.setPlayerPos(levels[levelName].start.row, levels[levelName].start.col);
+      this._map.setPlayerPos(levels[levelName].start.row, levels[levelName].start.col, characterImage);
       this._quizesRemaining = this._pokemon.length;
     } else {
       // An error fetching from API occurred, so display relevant 'h1' title
