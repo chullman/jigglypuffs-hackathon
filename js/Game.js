@@ -32,9 +32,9 @@ class Game {
     }
   }
 
-  async start() {
+  async start(levelName) {
     let error = undefined;
-    this._pokemon = await this._getPokemon(levels.one.pokemonCount)
+    this._pokemon = await this._getPokemon(levels[levelName].pokemonCount)
     .catch((err) => {
       error = err;
       console.warn(err.message);
@@ -43,10 +43,10 @@ class Game {
     if (typeof error === "undefined") {
       h1.textContent = "Play Game";
       this._map.render();
-      this._map.draw(levels.one.path, this._pokemon);
+      this._map.draw(levels[levelName].path, this._pokemon);
       const main = document.querySelector('.game');
       main.appendChild(this._map.getMapEl());
-      this._map.setPlayerPos(levels.one.start.row, levels.one.start.col);
+      this._map.setPlayerPos(levels[levelName].start.row, levels[levelName].start.col);
     } else {
       // An error fetching from API occurred, so display relevant 'h1' title
       (() => {
