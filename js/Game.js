@@ -1,4 +1,5 @@
 import levels from './levels.js';
+import Quiz from './Quiz.js';
 
 const TOTAL_POKEMON = 915;
 
@@ -103,13 +104,25 @@ class Game {
   _moveUp() {
     const { row, col } = this._map.getPlayerPos();
     if (row === 0) return;
-    if (!this._map.isPathTile(row -1, col)) return;
+    if (this._map.isPokemonTile(row - 1, col)) {
+      const name = this._getPokemonNameFromTile(row - 1, col);
+      const pokemon = this._getPokemonFromName(name);
+      this._startQuiz(pokemon);
+      return;
+    }
+    if (!this._map.isPathTile(row - 1, col)) return;
     this._map.updatePlayerPos(row - 1, col);
   }
 
   _moveDown() {
     const { row, col } = this._map.getPlayerPos();
     const { rows } = this._map.getDimensions();
+    if (this._map.isPokemonTile(row + 1, col)) {
+      const name = this._getPokemonNameFromTile(row + 1, col);
+      const pokemon = this._getPokemonFromName(name);
+      this._startQuiz(pokemon);
+      return;
+    }
     // Return if equal to row count
     // (not greater than) because row 
     // is is zero based:
@@ -121,6 +134,12 @@ class Game {
   _moveRight() {
     const { row, col } = this._map.getPlayerPos();
     const { cols } = this._map.getDimensions();
+    if (this._map.isPokemonTile(row, col + 1)) {
+      const name = this._getPokemonNameFromTile(row, col + 1);
+      const pokemon = this._getPokemonFromName(name);
+      this._startQuiz(pokemon);
+      return;
+    }
     // Return if equal to column count
     // (not greater than) because col
     // is zero based:
@@ -132,8 +151,28 @@ class Game {
   _moveLeft() {
     const { row, col } = this._map.getPlayerPos();
     if (col === 0) return;
+    if (this._map.isPokemonTile(row, col - 1)) {
+      const name = this._getPokemonNameFromTile(row, col - 1);
+      const pokemon = this._getPokemonFromName(name);
+      this._startQuiz(pokemon);
+      return;
+    }
     if (!this._map.isPathTile(row, col - 1)) return;
     this._map.updatePlayerPos(row, col - 1);
+  }
+
+  _getPokemonNameFromTile(row, col) {
+    const tile = this._map.getDivOfTile(row, col);
+    return tile.dataset.name;
+  }
+
+  _getPokemonFromName(name) {
+    return this._pokemon.filter(p => p.name === name)[0];
+  }
+
+  _startQuiz(pokemonData) {
+    const quiz = new Quiz(pokemonData);
+    quiz.start();
   }
 }
 

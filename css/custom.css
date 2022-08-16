@@ -95,3 +95,37 @@ main p {
         margin-top: 172px;
     }
 }
+
+.quiz-overlay {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 99;
+    width: 100%;
+    height: 100%;
+    background-color: #00000088;
+}
+
+.quiz {
+    display: flex;
+    flex-direction: column;
+    padding: 1em;
+    border-radius: 3px;
+    background-color: #fff;
+}
+
+.quiz .sprite {
+    width: 200px;
+}
+
+.quiz .abort {
+    padding: 0.5em 1em;
+    border: 1px solid #000;
+    border-radius: 3px;
+    font-size: 1em;
+}
