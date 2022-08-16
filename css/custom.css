@@ -177,6 +177,7 @@ main p {
 .quiz .finish,
 .quiz .yes {
     display: none;
+    margin-bottom: 0.5em;
 }
 
 .quiz .abort,
