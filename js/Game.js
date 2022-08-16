@@ -3,13 +3,17 @@ import Quiz from './Quiz.js';
 import { getRandomPokemon } from './helpers.js';
 
 class Game {
-  constructor(map) {
+  constructor(map, levelState, callback) {
+    this._levelState = levelState;
+    this._startGameCallback = callback;
     this._map = map;
     this._pokemon = null;
     this._quizesRemaining = 0;
   
-    document.addEventListener('keydown', this._onKeyDown.bind(this));
-    document.addEventListener('quiz-complete', this._onQuizComplete.bind(this));
+    this.boundKeydownEventHandler = this._onKeyDown.bind(this);
+    document.addEventListener('keydown', this.boundKeydownEventHandler);
+    this.boundQuizCompleteEventHandler = this._onQuizComplete.bind(this);
+    document.addEventListener('quiz-complete', this.boundQuizCompleteEventHandler);
   }
 
   _onKeyDown(event) {
@@ -29,7 +33,7 @@ class Game {
     }
   }
 
-  async start(levelName) {
+  async start(levelName, characterImage) {
     let error;
     this._pokemon = await getRandomPokemon(levels[levelName].pokemonCount)
     .catch((err) => {
@@ -43,7 +47,7 @@ class Game {
       this._map.draw(levels[levelName].path, this._pokemon);
       const main = document.querySelector('.game');
       main.appendChild(this._map.getMapEl());
-      this._map.setPlayerPos(levels[levelName].start.row, levels[levelName].start.col);
+      this._map.setPlayerPos(levels[levelName].start.row, levels[levelName].start.col, characterImage);
       this._quizesRemaining = this._pokemon.length;
     } else {
       // An error fetching from API occurred, so display relevant 'h1' title
@@ -136,6 +140,10 @@ class Game {
     this._quizesRemaining -= 1;
     if (this._quizesRemaining === 0) {
       console.log('level complete!');
+      document.removeEventListener('keydown', this.boundKeydownEventHandler);
+      document.removeEventListener('quiz-complete', this.boundQuizCompleteEventHandler);
+      this._levelState.increaseLevel();
+      this._startGameCallback(this._levelState.getCurrentLevelName(), true);
     }
   }
 }
