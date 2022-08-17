@@ -30,6 +30,7 @@ let three = document.createElement("img");
 three.setAttribute("class","image")
 let four = document.createElement("img");
 four.setAttribute("class","image")
+four.style.paddingLeft="20px";
 
 
 
@@ -185,6 +186,6 @@ function startGame(levelName, rebuildMap) {
     const game = new Game(map, levelState, startGame);
     game.start(levelName, characterImage);
     audio[pattern].play();
-    console.log(pattern)
+   
   }
 }

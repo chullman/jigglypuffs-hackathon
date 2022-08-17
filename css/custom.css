@@ -28,7 +28,7 @@ body {
 main {
     display: flex;
     flex-direction: column;
-    
+    align-items: center;
     margin-top: 72px;
     padding: 1em;
 }
@@ -54,7 +54,7 @@ main p {
 
 .about {
     display: none;
-    align-items: center;
+    
 }
 
 .about .animated-avatars {
@@ -76,7 +76,7 @@ main p {
 
 .game {
     display: none;
-    align-items: center;
+    
 }
 .map {
     display: flex;
@@ -195,7 +195,7 @@ main p {
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;   
     padding: 0px 350px 0px 350px;
     /* background-color: red; */
@@ -203,7 +203,7 @@ main p {
 
 /* effect on hover*/
 .trainers:hover {
-    box-shadow: 0 0 10px 10px white;
+    /* box-shadow: 0 0 10px 10px white; */
     transition: 0.3s;
     transform: scale(1.1, 1.1);
     /* background-color: blue;  */
@@ -229,6 +229,7 @@ main p {
 
 .trainers {
 position: relative;
+padding: 20px;
 
 }
 
