@@ -56,9 +56,8 @@ let char = document.createElement("div")
 char.setAttribute("id","trainersDiv")
 
 
-function myFunction(event) {
+function onCharacterImageClick(event) {
   characterImage = event.target.src 
-  console.log(event.target.src);
 }
 
 let middle1 = document.createElement("div")
@@ -116,8 +115,8 @@ char.appendChild(div4)
 
 hero.append(char)
 
-let choosing = document.querySelectorAll('img')
-.forEach(img => img.addEventListener("click", myFunction, false))
+document.querySelectorAll('img')
+.forEach(img => img.addEventListener("click", onCharacterImageClick))
 // Trainers - code end
 //========================
 
